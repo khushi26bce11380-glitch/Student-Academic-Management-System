@@ -1,6 +1,6 @@
 # Student Academic Management System (SAMS)
 
-A modular, command-line academic administration system developed for a first-year **Python Essentials** course. Built strictly using core Python language fundamentals, it demonstrates authentic data structures, clean object-oriented design, status bitmasks, and memory-efficient numerical arrays without external libraries or exception-handling hacks.
+A command-line Student Academic Management System developed using Python to manage student records, marks, attendance and academic reports for VITYarthi Project:Python Essential.  The project demonstrates Python Essentials concepts such as data structures, operators, control flow, functions, modules, arrays and object-oriented programming.
 
 ---
 
