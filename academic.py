@@ -1,15 +1,15 @@
 
 
 import array
-from constants import SUBJECT_NAMES, MAX_MARK_PER_SUBJECT, VALID_GRADES
+from constants import SUBJECTNAMES, MAXMARKPERSUBJECT, VALIDGRADES
 
 
 class AcademicRecord:
 
-    def init(self, student_id, marks_list, subject_tuple=SUBJECT_NAMES):
-        self.student_id = student_id
-        self.subjects = subject_tuple
-        self.marks = array.array("f", marks_list)
+    def init(self, studentid, markslist, subjecttuple=SUBJECTNAMES):
+        self.studentid = studentid
+        self.subjects = subjecttuple
+        self.marks = array.array("f", markslist)
 
     def calculatetotal(self):
         total = 0.0
@@ -22,7 +22,7 @@ class AcademicRecord:
         count = len(self.marks)
         if count == 0:
             return 0.0
-        percentage = (total / (count * MAX_MARK_PER_SUBJECT)) * 100.0
+        percentage = (total / (count * MAXMARKPERSUBJECT)) * 100.0
         return percentage
 
     def calculategrade(self):
@@ -38,7 +38,7 @@ class AcademicRecord:
             grade = "D"
         else:
             grade = "F"
-        if grade in VALID_GRADES:
+        if grade in VALIDGRADES:
             return grade
         return "F"
 
@@ -46,12 +46,12 @@ class AcademicRecord:
         if len(self.marks) == 0:
             return ("None", 0.0)
 
-        max_idx = 0
+        maxidx = 0
         for i in range(1, len(self.marks)):
-            if self.marks[i] > self.marks[max_idx]:
-                max_idx = i
+            if self.marks[i] > self.marks[maxidx]:
+                maxidx = i
 
-        return (self.subjects[max_idx], self.marks[max_idx])
+        return (self.subjects[maxidx], self.marks[maxidx])
 
     def getlowestmark(self):
         if len(self.marks) == 0:
@@ -59,22 +59,22 @@ class AcademicRecord:
 
         min_idx = 0
         for i in range(1, len(self.marks)):
-            if self.marks[i] < self.marks[min_idx]:
-                min_idx = i
+            if self.marks[i] < self.marks[minidx]:
+                minidx = i
 
-        return (self.subjects[min_idx], self.marks[min_idx])
+        return (self.subjects[minidx], self.marks[minidx])
 
     def displaymarkscard(self):
         total = self.calculatetotal()
         percentage = self.calculatepercentage()
         grade = self.calculategrade()
-        high_subj, high_mark = self.gethighestmark()
-        low_subj, low_mark = self.getlowestmark()
+        highsubj, highmark = self.gethighestmark()
+        lowsubj, lowmark = self.getlowestmark()
 
-        max_possible = len(self.marks) * MAX_MARK_PER_SUBJECT
+        max_possible = len(self.marks) * MAXMARKPERSUBJECT
 
         print("=" * 55)
-        print(f"            ACADEMIC MARKS CARD: ID {self.student_id}")
+        print(f"            ACADEMIC MARKS CARD: ID {self.studentid}")
         print("=" * 55)
         print(f"{'Subject':<28} | {'Mark':<8} | {'Max Mark':<8}")
         print("-" * 55)
@@ -82,7 +82,7 @@ class AcademicRecord:
         for i in range(len(self.marks)):
             subj = self.subjects[i]
             mark = self.marks[i]
-            print(f"{subj:<28} | {mark:<8.2f} | {MAX_MARK_PER_SUBJECT:<8.1f}")
+            print(f"{subj:<28} | {mark:<8.2f} | {MAXMARKPERSUBJECT:<8.1f}")
 
         print("-" * 55)
         print(f"Total Marks Scored : {total:.2f} / {max_possible:.1f}")
@@ -93,22 +93,22 @@ class AcademicRecord:
         print("=" * 55)
 
 
-def entermarks(academics_dict, student_id, marks_list, subject_tuple=SUBJECT_NAMES):
-    record = AcademicRecord(student_id, marks_list, subject_tuple)
-    academics_dict[student_id] = record
+def entermarks(academicsdict, studentid, markslist, subjecttuple=SUBJECTNAMES):
+    record = AcademicRecord(studentid, markslist, subjecttuple)
+    academicsdict[studentid] = record
     return record
 
 
-def getacademicrecord(academics_dict, student_id):
-    if student_id in academics_dict:
-        return academics_dict[student_id]
+def getacademicrecord(academicsdict, studentid):
+    if studentid in academicsdict:
+        return academicsdict[studentid]
     return None
 
 
-def displaystudentacademics(academics_dict, student_id):
-    record = getacademicrecord(academics_dict, student_id)
+def displaystudentacademics(academicsdict, studentid):
+    record = getacademicrecord(academicsdict, studentid)
     if record is None:
-        print(f"\nNo academic marks found on record for Student ID {student_id}.")
+        print(f"\nNo academic marks found on record for Student ID {studentid}.")
         return
 
     record.displaymarkscard()
