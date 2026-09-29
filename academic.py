@@ -57,7 +57,7 @@ class AcademicRecord:
         if len(self.marks) == 0:
             return ("None", 0.0)
 
-        min_idx = 0
+        minidx = 0
         for i in range(1, len(self.marks)):
             if self.marks[i] < self.marks[minidx]:
                 minidx = i
@@ -71,7 +71,7 @@ class AcademicRecord:
         highsubj, highmark = self.gethighestmark()
         lowsubj, lowmark = self.getlowestmark()
 
-        max_possible = len(self.marks) * MAXMARKPERSUBJECT
+        maxpossible = len(self.marks) * MAXMARKPERSUBJECT
 
         print("=" * 55)
         print(f"            ACADEMIC MARKS CARD: ID {self.studentid}")
@@ -85,11 +85,11 @@ class AcademicRecord:
             print(f"{subj:<28} | {mark:<8.2f} | {MAXMARKPERSUBJECT:<8.1f}")
 
         print("-" * 55)
-        print(f"Total Marks Scored : {total:.2f} / {max_possible:.1f}")
+        print(f"Total Marks Scored : {total:.2f} / {maxpossible:.1f}")
         print(f"Overall Percentage : {percentage:.2f}%")
         print(f"Letter Grade       : {grade}")
-        print(f"Highest Score      : {high_mark:.2f} ({high_subj})")
-        print(f"Lowest Score       : {low_mark:.2f} ({low_subj})")
+        print(f"Highest Score      : {highmark:.2f} ({highsubj})")
+        print(f"Lowest Score       : {lowmark:.2f} ({lowsubj})")
         print("=" * 55)
 
 
